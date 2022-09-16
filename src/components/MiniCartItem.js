@@ -1,13 +1,19 @@
+import {useContext} from "react";
+import {ShopContext} from "../context";
+
 function MiniCartItem(props) {
   const {
     id,
     name,
     price,
     quantity,
-    removeFromCart,
-    increaseCartQuantity,
-    decreaseCartQuantity
   } = props;
+
+  const {
+    removeFromCart = Function.prototype,
+    increaseCartQuantity = Function.prototype,
+    decreaseCartQuantity = Function.prototype,
+  } = useContext(ShopContext);
 
   return (
     <li className="collection-item">

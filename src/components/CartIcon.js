@@ -1,5 +1,13 @@
-function CartIcon(props) {
-  const {quantity = 0, handleCartShown = Function.prototype} = props;
+import {useContext} from "react";
+import {ShopContext} from "../context";
+
+function CartIcon() {
+  const {
+    order = [],
+    handleCartShown = Function.prototype,
+  } = useContext(ShopContext);
+
+  const quantity = order.length;
 
   return (
     <div
