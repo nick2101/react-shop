@@ -1,14 +1,13 @@
+import {useContext} from "react";
+import {ShopContext} from "../context";
 import {MiniCartItem} from "./MiniCartItem";
 
-function MiniCart(props) {
+function MiniCart() {
   const {
-    order,
+    order = [],
     handleCartShown = Function.prototype,
-    removeFromCart = Function.prototype,
-    increaseCartQuantity = Function.prototype,
-    decreaseCartQuantity = Function.prototype,
     fakePlaceOrder = Function.prototype,
-  } = props;
+  } = useContext(ShopContext);
 
   const totalPrice = order.reduce((sum, item) => {
     return sum + item.price * item.quantity;
@@ -28,9 +27,6 @@ function MiniCart(props) {
             <MiniCartItem
               key={item.id}
               {...item}
-              removeFromCart={removeFromCart}
-              increaseCartQuantity={increaseCartQuantity}
-              decreaseCartQuantity={decreaseCartQuantity}
             />))
           : <li className="collection-item">Cart is empty</li>
       }
@@ -42,6 +38,7 @@ function MiniCart(props) {
       </li>
       <button
         className="btn blue darken-2"
+        disabled={order.length < 1}
         style={{display: "block", margin: "5px auto 5px auto"}}
         onClick={fakePlaceOrder}
       >
